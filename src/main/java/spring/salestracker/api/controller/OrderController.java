@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import spring.salestracker.api.dto.OrderDTO;
-import spring.salestracker.api.entity.OrderStatus;
+import spring.salestracker.api.domain.order.dto.OrderDTO;
+import spring.salestracker.api.domain.order.model.OrderStatus;
 import spring.salestracker.api.service.OrderService;
 
 import java.util.List;

@@ -1,9 +1,9 @@
-package spring.salestracker.api.dto;
+package spring.salestracker.api.domain.order.dto;
 
 
-import spring.salestracker.api.entity.CustomerEntity;
-import spring.salestracker.api.entity.OrderStatus;
-import spring.salestracker.api.entity.ProductEntity;
+import spring.salestracker.api.domain.customer.entity.CustomerEntity;
+import spring.salestracker.api.domain.order.model.OrderStatus;
+import spring.salestracker.api.domain.product.entity.ProductEntity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;

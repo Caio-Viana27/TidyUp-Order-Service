@@ -1,6 +1,0 @@
-package spring.salestracker.api.dto;
-
-
-public record CustomerDTO () {
-
-}

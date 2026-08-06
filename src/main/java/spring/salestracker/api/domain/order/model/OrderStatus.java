@@ -1,4 +1,4 @@
-package spring.salestracker.api.entity;
+package spring.salestracker.api.domain.order.model;
 
 public enum OrderStatus {
     OPEN,
