@@ -8,11 +8,11 @@
 		<version>4.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>spring.salestracker.api</groupId>
-	<artifactId>SalesTracker</artifactId>
+	<groupId>com.tidyup.OrderService</groupId>
+	<artifactId>TidyUpOrderService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SalesTracker</name>
-	<description>API for Sales Tracking</description>
+	<name>TidyUpOrderService</name>
+	<description>Microservice for order management</description>
 	<url/>
 	<licenses>
 		<license/>
