@@ -7,13 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/customers")
+@RequestMapping("/customers")
 public class CustomerController {
 
-    private final CustomerService service;
-
     @Autowired
-    public CustomerController(CustomerService service) {
-        this.service = service;
-    }
+    private CustomerService service;
 }

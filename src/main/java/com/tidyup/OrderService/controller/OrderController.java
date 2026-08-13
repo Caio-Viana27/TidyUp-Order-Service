@@ -11,7 +11,7 @@ import com.tidyup.OrderService.service.OrderService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/orders")
+@RequestMapping("/orders")
 public class OrderController {
 
     private final OrderService service;
@@ -27,12 +27,12 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderDTO>> listAllOrders(@RequestParam(required = false) OrderStatus status) {
+    public ResponseEntity<List<OrderDTO>> getAllOrders(@RequestParam(required = false) OrderStatus status) {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(path = "/{orderId}")
-    public ResponseEntity<OrderDTO> listSpecificOrder(@PathVariable String orderId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable String orderId) {
         return ResponseEntity.ok().build();
     }
 }
