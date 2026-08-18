@@ -1,6 +1,8 @@
 package com.tidyup.OrderService.domain.order.entity;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import com.tidyup.OrderService.domain.customer.entity.CustomerEntity;
 import com.tidyup.OrderService.domain.order.dto.OrderDTO;
 import com.tidyup.OrderService.domain.order.model.OrderStatus;
@@ -9,11 +11,14 @@ import com.tidyup.OrderService.domain.item.entity.Item;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
+@Entity
+@Table(name = "ORDERS")
 public class OrderEntity {
 
     @Id
-    private final String id;
+    private UUID id;
     private CustomerEntity customer;
     private List<Item> products;
     private BigDecimal value;
@@ -21,7 +26,7 @@ public class OrderEntity {
     private int paymentDay;
     private Timestamp createdAt;
 
-    public OrderEntity(String id,
+    public OrderEntity(UUID id,
                        CustomerEntity customer,
                        List<Item> products,
                        BigDecimal value,

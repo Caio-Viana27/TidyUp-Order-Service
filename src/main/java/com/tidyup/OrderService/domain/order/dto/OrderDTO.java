@@ -8,8 +8,9 @@ import com.tidyup.OrderService.domain.item.entity.Item;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
-public record OrderDTO (String id,
+public record OrderDTO (UUID id,
                         CustomerEntity customer,
                         List<Item> products,
                         BigDecimal value,
