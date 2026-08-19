@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.tidyup.OrderService.domain.order.dto.OrderDTO;
-import com.tidyup.OrderService.domain.order.model.OrderStatus;
+import com.tidyup.OrderService.domain.order.dto.CreateOrderDTO;
 import com.tidyup.OrderService.service.OrderService;
 
 import java.util.List;
@@ -22,17 +21,17 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderDTO> createOrder() {
+    public ResponseEntity<CreateOrderDTO> createOrder() {
         return ResponseEntity.status(201).build();
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderDTO>> getAllOrders(@RequestParam(required = false) OrderStatus status) {
+    public ResponseEntity<List<CreateOrderDTO>> getAllOrders() {
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrderDTO> getOrderById(@PathVariable String orderId) {
+    public ResponseEntity<CreateOrderDTO> getOrderById(@PathVariable String orderId) {
         return ResponseEntity.ok().build();
     }
 }

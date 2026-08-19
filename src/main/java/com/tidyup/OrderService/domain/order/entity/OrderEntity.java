@@ -1,59 +1,52 @@
 package com.tidyup.OrderService.domain.order.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import com.tidyup.OrderService.domain.customer.entity.CustomerEntity;
-import com.tidyup.OrderService.domain.order.dto.OrderDTO;
-import com.tidyup.OrderService.domain.order.model.OrderStatus;
-import com.tidyup.OrderService.domain.item.entity.Item;
+import jakarta.persistence.*;
+import com.tidyup.OrderService.domain.order.dto.CreateOrderDTO;
+import com.tidyup.OrderService.domain.item.entity.ItemEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "ORDERS")
 public class OrderEntity {
-
     @Id
+    @Column(name = "ID")
     private UUID id;
-    private CustomerEntity customer;
-    private List<Item> products;
-    private BigDecimal value;
-    private OrderStatus status;
-    private int paymentDay;
-    private Timestamp createdAt;
 
-    public OrderEntity(UUID id,
-                       CustomerEntity customer,
-                       List<Item> products,
-                       BigDecimal value,
-                       OrderStatus status,
-                       int paymentDay,
-                       Timestamp createdAt) {
+    @Column(name = "RETAILER_ID")
+    private UUID retailerId;
 
-        this.id = id;
-        this.customer = customer;
-        this.value = value;
-        this.products = products;
-        this.status = status;
-        this.paymentDay = paymentDay;
-        this.createdAt = createdAt;
-    }
+    @Column(name = "CUSTOMER_ID")
+    private UUID customerId;
 
-    public OrderEntity(OrderDTO dto) {
-        this.id = dto.id();
-        this.customer = dto.customer();
-        this.products = dto.products();
-        this.value = dto.value();
-        this.status = dto.status();
-        this.paymentDay = dto.paymentDay();
-        this.createdAt = dto.createdAt();
-    }
+    @Column(name = "TOTAL_ITEMS")
+    private Integer totalItems;
 
-    public OrderDTO dto() {
-        return new OrderDTO(this.id, this.customer, this.products, this.value, this.status, this.paymentDay, this.createdAt);
-    }
+    @OneToMany
+    private List<ItemEntity> items;
+
+    @Column(name = "TOTAL_VALUE")
+    private BigDecimal totalValue;
+
+    @Column(name = "CREATED_AT")
+    private LocalDateTime createdAt;
+
+    @Column(name = "UPDATED_AT")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "DELETED_AT")
+    private LocalDateTime deletedAt;
+
+    public OrderEntity(CreateOrderDTO dto) {}
 }
