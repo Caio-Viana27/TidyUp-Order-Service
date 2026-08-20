@@ -32,7 +32,7 @@ public class OrderService {
         //Validates with stock service if product with productId exists, is available and price matches or else throws an exception
         itemEntityList.forEach(item -> itemRepository.save(item));
 
-        var orderEntity = new OrderEntity(dto.retailerId(), dto.customerId(), itemEntityList);
+        var orderEntity = new OrderEntity(dto.retailerId(), dto.customerId(), itemEntityList, orderStatusEntity);
         orderEntity = orderRepository.save(orderEntity);
         return new CreatedOrderDTO(orderEntity);
     }

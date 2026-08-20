@@ -1,7 +1,6 @@
 package com.tidyup.OrderService.domain.order.entity;
 
 import jakarta.persistence.*;
-import com.tidyup.OrderService.domain.order.dto.CreateOrderDTO;
 import com.tidyup.OrderService.domain.item.entity.ItemEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,12 +47,13 @@ public class OrderEntity {
     @Column(name = "DELETED_AT")
     private LocalDateTime deletedAt;
 
-    public OrderEntity(UUID retailerId, UUID customerId, List<ItemEntity> itemEntityList) {
+    public OrderEntity(UUID retailerId, UUID customerId, List<ItemEntity> items, OrderStatusEntity orderStatus) {
         this.id = UUID.randomUUID();
         this.retailerId = retailerId;
         this.customerId = customerId;
         this.issuedAt = this.createdAt = this.updatedAt = LocalDateTime.now();
-        this.items = itemEntityList;
+        this.status = orderStatus;
+        this.items = items;
     }
 
     public BigDecimal getOrderValue(List<ItemEntity> itemEntityList) {
