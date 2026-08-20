@@ -1,5 +1,6 @@
 package com.tidyup.OrderService.domain.item.entity;
 
+import com.tidyup.OrderService.domain.item.dto.ItemDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -42,6 +43,12 @@ public class ItemEntity {
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
-    @Column(name = "DELETED_AT")
-    private LocalDateTime deletedAt;
+    public ItemEntity(ItemDTO dto) {
+        this.id = UUID.randomUUID();
+        this.productId = dto.productId();
+        this.quantity = dto.quantity();
+        this.unitPrice = dto.unitPrice();
+        this.totalDiscount = dto.totalDiscount();
+        this.createdAt = this.updatedAt = LocalDateTime.now();
+    }
 }

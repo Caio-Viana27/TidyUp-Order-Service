@@ -30,14 +30,14 @@ public class OrderEntity {
     @Column(name = "CUSTOMER_ID")
     private UUID customerId;
 
-    @Column(name = "TOTAL_ITEMS")
-    private Integer totalItems;
+    @Column(name = "ISSUED_AT")
+    private LocalDateTime issuedAt;
+
+    @ManyToOne
+    private OrderStatusEntity status;
 
     @OneToMany
     private List<ItemEntity> items;
-
-    @Column(name = "TOTAL_VALUE")
-    private BigDecimal totalValue;
 
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
@@ -48,5 +48,21 @@ public class OrderEntity {
     @Column(name = "DELETED_AT")
     private LocalDateTime deletedAt;
 
-    public OrderEntity(CreateOrderDTO dto) {}
+    public OrderEntity(UUID retailerId, UUID customerId, List<ItemEntity> itemEntityList) {
+        this.id = UUID.randomUUID();
+        this.retailerId = retailerId;
+        this.customerId = customerId;
+        this.issuedAt = this.createdAt = this.updatedAt = LocalDateTime.now();
+        this.items = itemEntityList;
+    }
+
+    public BigDecimal getOrderValue(List<ItemEntity> itemEntityList) {
+        BigDecimal totalValue = BigDecimal.ZERO;
+        for (var item : itemEntityList) {
+            BigDecimal unitPrice = item.getUnitPrice();
+            BigDecimal quantity = BigDecimal.valueOf(item.getQuantity());
+            totalValue = totalValue.add(unitPrice.multiply(quantity));
+        }
+        return totalValue;
+    }
 }

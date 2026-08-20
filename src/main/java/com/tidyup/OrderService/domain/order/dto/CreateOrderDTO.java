@@ -1,17 +1,18 @@
 package com.tidyup.OrderService.domain.order.dto;
 
-import com.tidyup.OrderService.domain.item.entity.ItemEntity;
+import com.tidyup.OrderService.domain.item.dto.ItemDTO;
+import jakarta.validation.constraints.NotNull;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 public record CreateOrderDTO(
+        @NotNull
         UUID retailerId,
-        UUID customerId,
-        Integer totalItems,
-        List<ItemEntity> items,
-        BigDecimal value
-) {
 
-}
+        @NotNull
+        UUID customerId,
+
+        @NotNull
+        List<ItemDTO> items
+) {}

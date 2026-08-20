@@ -1,5 +1,6 @@
 package com.tidyup.OrderService.domain.item.dto;
 
+import com.tidyup.OrderService.domain.item.entity.ItemEntity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
@@ -25,4 +26,7 @@ public record ItemDTO (
         @PositiveOrZero
         BigDecimal totalDiscount
 ) {
+        public ItemDTO(ItemEntity item) {
+                this(item.getId(), item.getProductId(), item.getQuantity(), item.getUnitPrice(), item.getTotalDiscount());
+        }
 }
