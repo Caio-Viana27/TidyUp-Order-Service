@@ -1,6 +1,7 @@
 package com.tidyup.OrderService.domain.order.dto;
 
 import com.tidyup.OrderService.domain.item.dto.ItemDTO;
+import com.tidyup.OrderService.domain.item.dto.ListItemDTO;
 import com.tidyup.OrderService.domain.order.entity.OrderEntity;
 import jakarta.validation.constraints.NotNull;
 
@@ -25,7 +26,7 @@ public record DetailedOrderDTO(
         OrderStatusDTO status,
 
         @NotNull
-        List<ItemDTO> items,
+        List<ListItemDTO> items,
 
         @NotNull
         LocalDateTime createdAt,
@@ -39,7 +40,7 @@ public record DetailedOrderDTO(
                 order.getCustomerId(),
                 order.getIssuedAt(),
                 new OrderStatusDTO(order.getStatus()),
-                order.getItems().stream().map(ItemDTO::new).toList(),
+                order.getItems().stream().map(ListItemDTO::new).toList(),
                 order.getCreatedAt(),
                 order.getUpdatedAt()
         );

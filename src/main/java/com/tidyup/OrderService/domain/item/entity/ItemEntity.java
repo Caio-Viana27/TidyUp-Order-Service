@@ -28,6 +28,12 @@ public class ItemEntity {
     @Column(name = "PRODUCT_ID")
     private UUID productId;
 
+    @Column(name = "NAME")
+    private String name;
+
+    @Column(name = "SKU")
+    private String SKU;
+
     @Column(name = "QUANTITY")
     private Integer quantity;
 
@@ -47,8 +53,6 @@ public class ItemEntity {
         this.id = UUID.randomUUID();
         this.productId = dto.productId();
         this.quantity = dto.quantity();
-        this.unitPrice = dto.unitPrice();
-        this.totalDiscount = dto.totalDiscount();
         this.createdAt = this.updatedAt = LocalDateTime.now();
     }
 }

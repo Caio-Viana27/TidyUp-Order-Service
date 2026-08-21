@@ -1,14 +1,14 @@
 package com.tidyup.OrderService.domain.order.dto;
 
-import com.tidyup.OrderService.domain.item.dto.ItemDTO;
 import com.tidyup.OrderService.domain.item.dto.ListItemDTO;
 import com.tidyup.OrderService.domain.order.entity.OrderEntity;
 import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public record CreatedOrderDTO(
+public record ListOrderDTO(
         @NotNull
         UUID id,
 
@@ -25,19 +25,15 @@ public record CreatedOrderDTO(
         OrderStatusDTO status,
 
         @NotNull
-        List<ListItemDTO> items,
-
-        @NotNull
-        LocalDateTime createdAt
+        List<ListItemDTO> items
 ) {
-    public CreatedOrderDTO(OrderEntity order) {
+    public ListOrderDTO(OrderEntity order) {
         this(order.getId(),
                 order.getRetailerId(),
                 order.getCustomerId(),
                 order.getIssuedAt(),
                 new OrderStatusDTO(order.getStatus()),
-                order.getItems().stream().map(ListItemDTO::new).toList(),
-                order.getCreatedAt()
+                order.getItems().stream().map(ListItemDTO::new).toList()
         );
     }
 }

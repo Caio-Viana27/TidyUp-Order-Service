@@ -1,9 +1,12 @@
 package com.tidyup.OrderService.controller;
 
 import com.tidyup.OrderService.domain.order.dto.CreatedOrderDTO;
+import com.tidyup.OrderService.domain.order.dto.ListOrderDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +15,7 @@ import com.tidyup.OrderService.domain.order.dto.CreateOrderDTO;
 import com.tidyup.OrderService.service.OrderService;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.awt.print.Pageable;
 import java.net.URI;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -24,7 +25,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @Value("${resource.path}")
+    @Value("${service.address}")
     private String RESOURCE_PATH;
 
     @PostMapping
@@ -35,12 +36,14 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CreateOrderDTO>> getAllOrders(@PageableDefault(size = 20) Pageable pageable) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Page<ListOrderDTO>> getAllOrders(@PageableDefault(size = 20) Pageable pageable) {
+        Page<ListOrderDTO> page = orderService.getAll(pageable);
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CreateOrderDTO> getOrderById(@PathVariable UUID id) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ListOrderDTO> getOrderById(@PathVariable UUID id) {
+        ListOrderDTO orderDTO = orderService.getById(id);
+        return ResponseEntity.ok(orderDTO);
     }
 }
